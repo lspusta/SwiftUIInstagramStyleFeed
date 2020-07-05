@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State var postTitle = "";
+    
     var body: some View {
         NavigationView {
             List {
@@ -34,7 +37,7 @@ struct StoriesView: View {
                Text("Watch all")
             }
             
-            // Stories Circles
+            // Storie Circles
             ScrollView([.horizontal], showsIndicators: false){
                 HStack {
                     VStack {
@@ -92,7 +95,7 @@ struct PostCell: View {
                 .padding(.leading, -20)
                 .padding(.trailing, -20)
             
-            // Barre horizontale
+            //
             HStack(alignment: .center) {
                 Image(systemName: "heart")
                 Image(systemName: "bubble.right")
@@ -101,11 +104,15 @@ struct PostCell: View {
                 Image(systemName: "bookmark")
             }
             
-            // Le nombre de Likes
+            // Title
+            Text("Swift UI is so Amazing!")
+                .font(Font.system(size: 16.5))
+            
+            // Lieks
             Text("Liked by Other User and 621 others")
                 .font(Font.system(size: 13.5))
             
-            // La description
+            // description
             Text("Swift UI is Amazing! #SwiftUI")
                             .lineLimit(4)
                             .font(Font.system(size: 12.5))
