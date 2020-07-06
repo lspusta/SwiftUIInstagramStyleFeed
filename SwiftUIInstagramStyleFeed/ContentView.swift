@@ -4,20 +4,20 @@
 //
 //  Created by Lucas Spusta on 7/5/20.
 //
-
+import Combine
 import SwiftUI
 
 struct ContentView: View {
-    
-    @State var postTitle = "";
-    
+  
     var body: some View {
         NavigationView {
             List {
                 StoriesView()
-                PostCell()
-                PostCell()
-                PostCell()
+                ForEach(0 ..< 30) {_ in
+                    PostCell(description: "Test Description", likes: "1,559 Likes")
+                }
+              
+        
             }.navigationBarTitle("Feed")
             .navigationBarItems(leading: Image(systemName: "camera"), trailing: Image(systemName: "paperplane"))
             .padding(.leading, -20)
@@ -37,12 +37,15 @@ struct StoriesView: View {
                Text("Watch all")
             }
             
-            // Storie Circles
+            // Stories Circles
             ScrollView([.horizontal], showsIndicators: false){
                 HStack {
                     VStack {
                         ZStack(alignment: .bottomTrailing) {
-                            Image("")
+                            Image("Avatar").resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 70.0, height: 70.0)
+                                .clipShape(Circle())
                             Image("Add")
                         }
                         Text("Your Story")
@@ -72,12 +75,16 @@ struct StoriesView: View {
 }
 
 struct PostCell: View {
-    
+    var description : String
+    var likes : String
     var body: some View {
         VStack(alignment: .leading) {
             // Header
             HStack {
-//                Image("Avatar").frame(width: 25, height: 25)
+                Image("Avatar").resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 30.0, height: 30.0)
+                    .clipShape(Circle())
                 VStack(alignment: .leading){
                     Text("Lucas Spusta")
                         .font(Font.system(size: 13.5))
@@ -104,19 +111,17 @@ struct PostCell: View {
                 Image(systemName: "bookmark")
             }
             
-            // Title
-            Text("Swift UI is so Amazing!")
-                .font(Font.system(size: 16.5))
+            // Likes
+            Text(likes)
+                .font(Font.system(size: 11.5))
+                .padding(.top, 2)
             
-            // Lieks
-            Text("Liked by Other User and 621 others")
-                .font(Font.system(size: 13.5))
-            
+    
             // description
-            Text("Swift UI is Amazing! #SwiftUI")
+            Text(description)
                             .lineLimit(4)
-                            .font(Font.system(size: 12.5))
-                            .foregroundColor(.init(white: 0.2))
+                            .font(Font.system(size: 14.5))
+                .padding(.top, 5)
         }
     }
 }
